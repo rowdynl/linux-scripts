@@ -1,2 +1,2 @@
-# Arhived
-Old scripts that are no longer relevant
+# Archived
+Old scripts that are no longer relevant.
