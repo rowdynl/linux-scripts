@@ -1,0 +1,54 @@
+# Bash completion for: container-helper
+# Loads suggestions for <name>, <profile>, and [quota].
+#
+# INSTALLATION
+# sudo ln -s /scripts/bash/zfs-container-helper.completion /etc/bash_completion.d/zfs-container
+# source /usr/share/bash-completion/bash_completion
+# source /etc/bash_completion.d/zfs-container
+#
+# USAGE
+# zfs-container <Tab>
+
+
+_zfs_container_helper_complete() {
+  local cur prev words cword
+  _init_completion || return
+
+  # Arguments:
+  #   container-helper <name> <profile> [quota]
+  # Profiles: general|db|media|logs
+  # Aliases: postgres|mariadb|mysql|mongo|influx (→ db)
+
+  # 1) Detect argument position
+  local argpos=$((COMP_CWORD))     # 0 = command, 1 = <name>, 2 = <profile>, 3 = [quota]
+  local bind_root="/docker/bind_mounts"
+
+  case "$argpos" in
+    1)
+      # Suggest container names from existing ZFS bind mounts (dir names)
+      # Fallback to empty if path missing
+      if [[ -d "$bind_root" ]]; then
+        COMPREPLY=( $(compgen -W "$(ls -1 "$bind_root" 2>/dev/null | tr ' ' '\n')" -- "$cur") )
+      else
+        COMPREPLY=()
+      fi
+      ;;
+    2)
+      # Suggest profiles + aliases (aliases map to 'db' inside the script)
+      local profiles="general db media logs"
+      local aliases="postgres mariadb mysql mongo influx"
+      COMPREPLY=( $(compgen -W "$profiles $aliases" -- "$cur") )
+      ;;
+    3)
+      # Suggest quota examples; free text also allowed (e.g. 50G, 200G, 1T)
+      local quota_examples="10G 20G 50G 100G 200G 500G 1T"
+      COMPREPLY=( $(compgen -W "$quota_examples" -- "$cur") )
+      ;;
+    *)
+      COMPREPLY=()
+      ;;
+  esac
+}
+
+# Register completion function for the command name
+complete -F _zfs_container_helper_complete zfs-container
