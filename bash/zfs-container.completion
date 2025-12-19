@@ -1,8 +1,8 @@
-# Bash completion for: container-helper
+# Bash completion for: zfs-container
 # Loads suggestions for <name>, <profile>, and [quota].
 #
 # INSTALLATION
-# sudo ln -s /scripts/bash/zfs-container-helper.completion /etc/bash_completion.d/zfs-container
+# sudo ln -s /scripts/bash/zfs-container.completion /etc/bash_completion.d/zfs-container
 # source /usr/share/bash-completion/bash_completion
 # source /etc/bash_completion.d/zfs-container
 #
@@ -10,12 +10,12 @@
 # zfs-container <Tab>
 
 
-_zfs_container_helper_complete() {
+_zfs_container_complete() {
   local cur prev words cword
   _init_completion || return
 
   # Arguments:
-  #   container-helper <name> <profile> [quota]
+  #   zfs-container <name> <profile> [quota]
   # Profiles: general|db|media|logs
   # Aliases: postgres|mariadb|mysql|mongo|influx (→ db)
 
@@ -51,4 +51,4 @@ _zfs_container_helper_complete() {
 }
 
 # Register completion function for the command name
-complete -F _zfs_container_helper_complete zfs-container
+complete -F _zfs_container_complete zfs-container
