@@ -18,8 +18,8 @@ set -euo pipefail
 
 # ---------- Defaults ----------
 ZFS_POOL_DEFAULT="tank"
-ZFS_PARENT_DEFAULT="tank/docker"
-MOUNT_BASE_DEFAULT="/docker"
+ZFS_PARENT_DEFAULT="tank/docker/bind-mounts"
+MOUNT_BASE_DEFAULT="/docker/bind-mounts"
 OWNER_UID_DEFAULT="1000"
 OWNER_GID_DEFAULT="1000"
 
