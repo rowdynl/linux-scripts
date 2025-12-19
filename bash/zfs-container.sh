@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# zfs-container-helper.sh
+# zfs-container.sh
 # Create and remove a ZFS-backed Docker volume for a container stack.
 #
 # Usage:
@@ -11,6 +11,9 @@
 #   - Base settings (pool, parent, mount base, owner)
 #   - Profile definitions: PROFILES_<name>="prop=val;prop=val;..."
 #
+# Installation
+# chmod a+x zfs-container.sh
+# sudo ln -s /scripts/bash/zfs-container.sh /usr/local/sbin/zfs-container
 set -euo pipefail
 
 # ---------- Defaults ----------
