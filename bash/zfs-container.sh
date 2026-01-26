@@ -21,7 +21,7 @@ ZFS_POOL_DEFAULT="tank"
 ZFS_PARENT_DEFAULT="tank/docker/volumes"
 MOUNT_BASE_DEFAULT="/mnt/docker/volumes"
 OWNER_UID_DEFAULT="1000"
-OWNER_GID_DEFAULT="1000"
+OWNER_GID_DEFAULT="100"
 
 CONF_FILE="/etc/zfs-container.conf"
 
